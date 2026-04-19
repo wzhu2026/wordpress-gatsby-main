@@ -15,6 +15,7 @@ const Layout = ({ children, title }) => {
       }}>
         <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>首页</Link>
         <Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>关于</Link>
+        <Link to="/tags" style={{ color: 'white', textDecoration: 'none' }}>标签</Link>  {/* 新增 */}
       </nav>
 
       {/* 主要内容 */}
@@ -31,7 +32,7 @@ const Layout = ({ children, title }) => {
         color: '#666',
         borderTop: '1px solid #eee'
       }}>
-        © {new Date().getFullYear()} 我的学习项目
+        © {new Date().getFullYear()} 我的博客
       </footer>
     </div>
   )
