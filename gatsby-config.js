@@ -1,7 +1,13 @@
 module.exports = {
   siteMetadata: {
-    title: `我的学习项目`,
-    description: `学习 Gatsby 的示例项目`,
+    title: `我的博客`,
+    titleTemplate: `%s | 我的博客`,
+    description: `分享技术文章和学习心得`,
+    url: `https://your-site.com`,  // 部署后改成实际域名
+    image: `/icon.png`,
+    twitterUsername: `@yourhandle`,
   },
-  plugins: [],  // 暂时不加任何图片插件
+  plugins: [
+    `gatsby-plugin-react-helmet`,
+  ],
 }
