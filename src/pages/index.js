@@ -1,17 +1,32 @@
 import * as React from "react"
 import Layout from "../components/Layout"
+import posts from "../data/posts"
 
 const IndexPage = () => {
   return (
-    <Layout title="欢迎学习 Gatsby">
-      <p>这是一个极简的 Gatsby 学习项目。</p>
-      <p>当前时间：{new Date().toLocaleString()}</p>
-      <p>你可以通过修改这些文件来学习：</p>
-      <ul>
-        <li><code>src/pages/</code> - 页面文件</li>
-        <li><code>src/components/</code> - 组件文件</li>
-        <li><code>gatsby-config.js</code> - 配置文件</li>
-      </ul>
+    <Layout title="最新文章">
+      {posts.map(post => (
+        <article key={post.id} style={{
+          marginBottom: '2rem',
+          padding: '1.5rem',
+          background: 'white',
+          borderRadius: '8px',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+        }}>
+          <h2 style={{ marginBottom: '0.5rem' }}>
+            <a href={`/post/${post.slug}`} style={{ color: '#2c3e50' }}>
+              {post.title}
+            </a>
+          </h2>
+          <div style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1rem' }}>
+            📅 {post.date} | 🏷️ {post.tags.join(', ')}
+          </div>
+          <p>{post.excerpt}</p>
+          <a href={`/post/${post.slug}`} style={{ display: 'inline-block', marginTop: '1rem' }}>
+            阅读全文 →
+          </a>
+        </article>
+      ))}
     </Layout>
   )
 }
