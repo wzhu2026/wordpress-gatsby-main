@@ -11,11 +11,13 @@ const Layout = ({ children, title }) => {
         display: 'flex',
         gap: '2rem',
         justifyContent: 'center',
+        flexWrap: 'wrap',
         marginBottom: '2rem'
       }}>
         <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>首页</Link>
         <Link to="/about" style={{ color: 'white', textDecoration: 'none' }}>关于</Link>
-        <Link to="/tags" style={{ color: 'white', textDecoration: 'none' }}>标签</Link>  {/* 新增 */}
+        <Link to="/tags" style={{ color: 'white', textDecoration: 'none' }}>标签</Link>
+        <Link to="/search" style={{ color: 'white', textDecoration: 'none' }}>搜索</Link>  {/* 新增 */}
       </nav>
 
       {/* 主要内容 */}
