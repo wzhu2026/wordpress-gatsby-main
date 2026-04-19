@@ -1,6 +1,6 @@
 const path = require("path")
 
-// 文章数据 - 直接写在这里，避免路径问题
+// 文章数据
 const posts = [
   {
     id: 1,
@@ -31,10 +31,41 @@ const posts = [
   }
 ]
 
+// 获取所有标签及其文章
+const getTagsMap = () => {
+  const tagsMap = new Map()
+  posts.forEach(post => {
+    post.tags.forEach(tag => {
+      if (!tagsMap.has(tag)) {
+        tagsMap.set(tag, [])
+      }
+      tagsMap.get(tag).push(post)
+    })
+  })
+  return tagsMap
+}
+
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+  const { createNode } = actions
+
+  posts.forEach(post => {
+    createNode({
+      ...post,
+      id: createNodeId(`post-${post.id}`),
+      internal: {
+        type: `BlogPost`,
+        contentDigest: createContentDigest(post),
+      },
+    })
+  })
+
+  console.log(`✅ 添加了 ${posts.length} 篇文章到 GraphQL`)
+}
+
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
 
-  // 为每篇文章创建详情页
+  // 创建文章详情页
   posts.forEach(post => {
     createPage({
       path: `/post/${post.slug}`,
@@ -45,10 +76,19 @@ exports.createPages = async ({ actions }) => {
     })
   })
 
-  console.log(`✅ 创建了 ${posts.length} 个文章页面`)
-}
+  // 创建标签页面
+  const tagsMap = getTagsMap()
+  tagsMap.forEach((tagPosts, tag) => {
+    createPage({
+      path: `/tag/${encodeURIComponent(tag)}`,
+      component: path.resolve(`./src/templates/tag.js`),
+      context: {
+        tag: tag,
+        posts: tagPosts
+      }
+    })
+  })
 
-// 空的 sourceNodes，避免错误
-exports.sourceNodes = async () => {
-  console.log(`✅ 使用本地数据模式`)
+  console.log(`✅ 创建了 ${posts.length} 个文章页面`)
+  console.log(`✅ 创建了 ${tagsMap.size} 个标签页面`)
 }
