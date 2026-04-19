@@ -1,6 +1,5 @@
 /**
- * Gatsby configuration with WordPress source
- * For self-hosted WordPress with WPGraphQL
+ * Gatsby configuration
  */
 
 require('dotenv').config();
@@ -25,24 +24,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-source-wordpress`,
-      options: {
-        // 您的自建 WordPress GraphQL 地址
-        url: process.env.WPGRAPHQL_URL || `http://localhost/graphql`,
-        schema: {
-          typePrefix: `Wp`,
-        },
-        develop: {
-          hardCacheDataFiles: false,
-        },
-        type: {
-          Post: {
-            limit: process.env.NODE_ENV === `development` ? 50 : 1000,
-          },
-        },
-      },
-    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
