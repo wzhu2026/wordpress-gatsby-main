@@ -28,8 +28,39 @@ const posts = [
     excerpt: "学习 React Hooks 的核心概念。",
     content: "<p>Hooks 是 React 16.8 引入的新特性。</p><h2>常用 Hooks</h2><ul><li>useState - 管理状态</li><li>useEffect - 处理副作用</li><li>useContext - 共享状态</li></ul>",
     tags: ["React", "JavaScript"]
+  },
+  // 添加更多测试文章来测试分页
+  {
+    id: 4,
+    slug: "css-tips",
+    title: "CSS 实用技巧",
+    date: "2025-04-16",
+    excerpt: "分享一些实用的 CSS 技巧。",
+    content: "<p>CSS 技巧分享...</p>",
+    tags: ["CSS", "前端"]
+  },
+  {
+    id: 5,
+    slug: "javascript-advanced",
+    title: "JavaScript 进阶知识",
+    date: "2025-04-15",
+    excerpt: "深入理解 JavaScript 核心概念。",
+    content: "<p>JavaScript 进阶内容...</p>",
+    tags: ["JavaScript", "前端"]
+  },
+  {
+    id: 6,
+    slug: "git-guide",
+    title: "Git 使用指南",
+    date: "2025-04-14",
+    excerpt: "Git 版本控制入门到精通。",
+    content: "<p>Git 使用指南...</p>",
+    tags: ["Git", "工具"]
   }
 ]
+
+// 每页显示文章数
+const POSTS_PER_PAGE = 2
 
 // 获取所有标签及其文章
 const getTagsMap = () => {
@@ -89,6 +120,28 @@ exports.createPages = async ({ actions }) => {
     })
   })
 
+  // 创建分页首页
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE)
+  
+  for (let i = 0; i < totalPages; i++) {
+    const start = i * POSTS_PER_PAGE
+    const end = start + POSTS_PER_PAGE
+    const pagePosts = posts.slice(start, end)
+    
+    createPage({
+      path: i === 0 ? `/` : `/page/${i + 1}`,
+      component: path.resolve(`./src/templates/post-list.js`),
+      context: {
+        posts: pagePosts,
+        currentPage: i + 1,
+        totalPages: totalPages,
+        prevPage: i > 0 ? (i === 1 ? `/` : `/page/${i}`) : null,
+        nextPage: i < totalPages - 1 ? `/page/${i + 2}` : null
+      }
+    })
+  }
+
   console.log(`✅ 创建了 ${posts.length} 个文章页面`)
   console.log(`✅ 创建了 ${tagsMap.size} 个标签页面`)
+  console.log(`✅ 创建了 ${totalPages} 个分页页面`)
 }
