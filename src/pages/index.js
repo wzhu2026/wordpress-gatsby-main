@@ -1,12 +1,12 @@
 import * as React from "react"
 import Layout from "../components/Layout"
 import posts from "../data/posts"
-import ImageExample from "../components/ImageExample"  // 新增
+import ImageExample from "../components/ImageExample"
 
 const IndexPage = () => {
   return (
     <Layout title="最新文章">
-      {/* 新增图片示例区域 */}
+      {/* 图片示例区域 */}
       <ImageExample />
       
       {posts.map(post => (
