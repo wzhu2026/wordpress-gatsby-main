@@ -1,0 +1,3 @@
+/**
+ * Gatsby Browser APIs
+ */
