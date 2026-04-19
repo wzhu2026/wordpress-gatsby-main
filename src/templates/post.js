@@ -4,6 +4,15 @@ import Layout from "../components/Layout"
 const PostTemplate = ({ pageContext }) => {
   const { post } = pageContext
 
+  if (!post) {
+    return (
+      <Layout title="文章未找到">
+        <p>抱歉，您访问的文章不存在。</p>
+        <a href="/">返回首页</a>
+      </Layout>
+    )
+  }
+
   return (
     <Layout title={post.title}>
       <div style={{ marginBottom: '1rem', color: '#666' }}>
