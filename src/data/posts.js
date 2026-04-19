@@ -3,7 +3,7 @@ const posts = [
   {
     id: 1,
     slug: "hello-world",
-    title: "欢迎来到我的博客",
+    title: "我的博客",
     date: "2025-04-19",
     excerpt: "这是我的第一篇博客文章。",
     content: "<p>这是我的第一篇博客文章。欢迎来到我的个人博客！</p><p>我会在这里分享技术文章和学习心得。</p>",
