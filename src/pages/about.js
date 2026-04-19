@@ -1,20 +1,22 @@
 import * as React from "react"
 import Layout from "../components/Layout"
+import Seo from "../components/Seo"
 
 const AboutPage = () => {
   return (
-    <Layout title="关于本项目">
-      <p>这个项目是为了学习 Gatsby 而创建的。</p>
-      <p>Gatsby 是一个基于 React 的静态站点生成器。</p>
-      <h2>学习要点</h2>
-      <ul>
-        <li>✅ 页面路由（文件系统路由）</li>
-        <li>✅ 组件化开发（Layout 组件）</li>
-        <li>⏳ 样式添加（下一步）</li>
-        <li>⏳ 数据管理</li>
-        <li>⏳ 动态路由</li>
-      </ul>
-    </Layout>
+    <>
+      <Seo title="关于" description="了解我和这个博客" />
+      <Layout title="关于我">
+        <p>你好！欢迎来到我的博客。</p>
+        <p>这里会分享：</p>
+        <ul>
+          <li>技术文章和学习心得</li>
+          <li>项目经验分享</li>
+          <li>前端开发技巧</li>
+        </ul>
+        <p>希望通过我的分享能帮助到更多人。</p>
+      </Layout>
+    </>
   )
 }
 
